@@ -33,7 +33,7 @@ unsigned int convert_sbase(buffer_t *output, long int num, char *base,
 		}
 	}
 	digit = base[(num < 0 ? -1 : 1) * (num % size)];
-	_memcpy(ouptut, &digit, 1);
+	_memcpy(output, &digit, 1);
 
 	return (ret);
 }
@@ -54,7 +54,7 @@ unsigned int convert_ubase(buffer_t *output, unsigned long int num, char *base,
 	unsigned int size, ret = 1;
 	char digit, pad = '0', *lead = "0x";
 
-	for (size = o; *(base + size);)
+	for (size = 0; *(base + size);)
 		size++;
 	if (num >= size)
 		ret += convert_ubase(output, num / size, base,

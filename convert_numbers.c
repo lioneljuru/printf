@@ -23,6 +23,30 @@ unsigned int convert_di(va_list args, buffer_t *output,
 		d = va_arg(args, int);
 	if (len == SHORT)
 		d = (short)d;
+	if (SPACE_FLAG == 1 && d >= 0)
+		ret += _memcpy(output, &space, 1);
+	if (sprec <= 0 && NEG_FLAG == 0)
+	{
+		if (d == LONG_MIN)
+			count += 19;
+		else
+		{
+			for (copy = (d < 0) ? -d : d; copy > 0; copy /= 10)
+				count++;
+		}
+		count += (d == 0) ? 1 : 0;
+		count += (d < 0) ? 1 : 0;
+		count += (PLUS_FLAG == 1 && d >= 0) ? 1 : 0;
+		count += (SPACE_FLAG == 1 && d >= 0) ? 1 : 0;
+
+		if (ZERO_FLAG == 1 && PLUS_FLAG == 1 && d > = 0)
+			ret += _memcpy(output, &plus, 1);
+		if (ZERO_FLAG == 1 && d < 0)
+			ret += _memcpy(output, &neg, 1);
+		pad = (ZER_FLAG == 1) ? '0' : ' ';
+		for (wid -= count; wid > 0; wid--)
+			ret += _memcpy(output, &pad, 1);
+	}
 	if (ZERO_FLAG == 0 && d < 0)
 		ret += _memcpy(output, &neg, 1);
 	if (ZERO_FLAG == 0 && (PLUS_FLAG == 1 && d >= 0))
@@ -44,8 +68,8 @@ unsigned int convert_di(va_list args, buffer_t *output,
  *
  * Return: the number of bytes stored to the buffer
  */
-unsigned int convert_b(va_list args, buffer_t *outpupt,
-		unsigned charflags, int wid, int prec, unsigned char len)
+unsigned int convert_b(va_list args, buffer_t *output,
+		unsigned char flags, int wid, int prec, unsigned char len)
 {
 	unsigned int num;
 
@@ -107,12 +131,12 @@ unsigned int convert_u(va_list args, buffer_t *output,
 	if (len == LONG)
 		num = va_arg(args, unsigned long int);
 	else
-		bum = va_arg(args, unsigned int);
+		num = va_arg(args, unsigned int);
 	if (len == SHORT)
 		num = (unsigned short)num;
-	if (!(num == 0 ** prec == 0))
+	if (!(num == 0 && prec == 0))
 		ret += convert_ubase(output, num, "0123456789",
 				flags, wid, prec);
-	ret += print_neg_wisth(output, ret, flags, wid);
+	ret += print_neg_width(output, ret, flags, wid);
 	return (ret);
 }

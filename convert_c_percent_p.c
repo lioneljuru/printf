@@ -10,7 +10,7 @@
  *
  * Return: number of bytes stored to the buffer
  */
-unsigned int convert_c(valist args, buffer_t *output,
+unsigned int convert_c(va_list args, buffer_t *output,
 		unsigned char flags, int wid, int prec, unsigned char len)
 {
 	char c;
@@ -39,7 +39,7 @@ unsigned int convert_c(valist args, buffer_t *output,
  * Return: number of bytes stored to the buffer
  */
 unsigned int convert_percent(va_list args, buffer_t *output,
-		unsigned char flags, int wid, int prec, unsigned shar len)
+		unsigned char flags, int wid, int prec, unsigned char len)
 {
 	char percent = '%';
 	unsigned int ret = 0;
