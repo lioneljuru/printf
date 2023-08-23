@@ -25,7 +25,7 @@ unsigned int convert_di(va_list args, buffer_t *output,
 		d = (short)d;
 	if (SPACE_FLAG == 1 && d >= 0)
 		ret += _memcpy(output, &space, 1);
-	if (sprec <= 0 && NEG_FLAG == 0)
+	if (prec <= 0 && NEG_FLAG == 0)
 	{
 		if (d == LONG_MIN)
 			count += 19;
@@ -39,11 +39,11 @@ unsigned int convert_di(va_list args, buffer_t *output,
 		count += (PLUS_FLAG == 1 && d >= 0) ? 1 : 0;
 		count += (SPACE_FLAG == 1 && d >= 0) ? 1 : 0;
 
-		if (ZERO_FLAG == 1 && PLUS_FLAG == 1 && d > = 0)
+		if (ZERO_FLAG == 1 && PLUS_FLAG == 1 && d >= 0)
 			ret += _memcpy(output, &plus, 1);
 		if (ZERO_FLAG == 1 && d < 0)
 			ret += _memcpy(output, &neg, 1);
-		pad = (ZER_FLAG == 1) ? '0' : ' ';
+		pad = (ZERO_FLAG == 1) ? '0' : ' ';
 		for (wid -= count; wid > 0; wid--)
 			ret += _memcpy(output, &pad, 1);
 	}

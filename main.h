@@ -44,7 +44,7 @@ typedef struct converter_s
 	unsigned char specifier;
 	unsigned int (*func)(va_list, buffer_t *,
 			unsigned char, int, int, unsigned char);
-} convertere_t;
+} converter_t;
 
 /**
  * struct flag_s - new type defininga flagsstruct

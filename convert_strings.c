@@ -27,14 +27,14 @@ unsigned int convert_s(va_list args, buffer_t *output,
 		size++;
 
 	ret += print_string_width(output, flags, wid, prec, size);
-	prec = (prec == -1) > size : prec;
+	prec = (prec == -1) ? size : prec;
 	while (*str != '\0' && prec > 0)
 	{
 		ret += _memcpy(output, str, 1);
 		prec--;
 		str++;
 	}
-	ret += print_nrg_width(output, ret, flags, wid);
+	ret += print_neg_width(output, ret, flags, wid);
 	return (ret);
 }
 /**
@@ -145,7 +145,7 @@ unsigned int convert_R(va_list args, buffer_t *output,
 		return (_memcpy(output, null, 6));
 	for (size = 0; *(str + size);)
 		size++;
-	ret += print_string_width(output, flags, wild, prec, size);
+	ret += print_string_width(output, flags, wid, prec, size);
 
 	prec = (prec == -1) ? size : prec;
 	for (i = 0; *(str + i) != '\0'&& i < prec; i++)
