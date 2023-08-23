@@ -8,7 +8,7 @@
  */
 void cleanup(va_list args, buffer_t *output)
 {
-	va_ends(args);
+	va_end(args);
 	write(1, output->start, output->len);
 	free_buffer(output);
 }
@@ -38,7 +38,7 @@ int run_printf(const char *format, va_list args, buffer_t *output)
 			wid = handle_width(args, format + i + tmp + 1, &tmp);
 			prec = handle_precision(args, format + i + tmp + 1, &tmp);
 			len = handle_length(format + i + tmp + 1, &tmp);
-			f = handle_specifiers(format + i + tmp + 1, &tmp);
+			f = handle_specifiers(format + i + tmp + 1);
 			if (f != NULL)
 			{
 				i += tmp + 1;

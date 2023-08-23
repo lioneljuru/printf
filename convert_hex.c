@@ -24,7 +24,7 @@ unsigned int convert_x(va_list args, buffer_t *output,
 	if (len == SHORT)
 		num = (unsigned short)num;
 	if (HASH_FLAG == 1 && num != 0)
-		ret += _mempcy(output, lead, 2);
+		ret += _memcpy(output, lead, 2);
 	if (!(num == 0 && prec == 0))
 		ret += convert_ubase(output, num, "0123456789abcdef",
 				flags, wid, prec);
